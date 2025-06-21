@@ -11,6 +11,26 @@ AFPSCharacter::AFPSCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	HeadSocketName = "head";
+	LeftHandSocketName = "lefthand";
+	RightHandSocketName = "righthand";
+
+	FirstPersonMesh = CreateDefaultSubobject<USkeletalMeshComponent>("First Person Mesh");
+	FirstPersonMesh->SetupAttachment(GetRootComponent());
+	FirstPersonMesh->SetOnlyOwnerSee(true);
+	FirstPersonMesh->SetFirstPersonPrimitiveType(EFirstPersonPrimitiveType::FirstPerson);
+	FirstPersonMesh->SetCollisionProfileName("No Collision");
+
+	FirstPersonCamera = CreateDefaultSubobject<UCameraComponent>("First Person Camera");
+	FirstPersonCamera->SetupAttachment(FirstPersonMesh, HeadSocketName);
+	FirstPersonCamera->SetEnableFirstPersonFieldOfView(true);
+	FirstPersonCamera->SetEnableFirstPersonScale(true);
+	FirstPersonCamera->SetFirstPersonFieldOfView(60.f);
+	FirstPersonCamera->SetFirstPersonScale(0.6f);
+
+	GetMesh()->SetOwnerNoSee(true);
+	GetMesh()->SetFirstPersonPrimitiveType(EFirstPersonPrimitiveType::WorldSpaceRepresentation);
+	GetMesh()->SetCollisionProfileName("No Collision");
 }
 
 void AFPSCharacter::BeginPlay()

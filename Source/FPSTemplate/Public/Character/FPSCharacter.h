@@ -23,6 +23,19 @@ protected:
 	virtual void BeginPlay() override;
 
 protected:
+	/** Sockets **/
+	/* 
+		These are defined in the Constructor, but made visible for animators to make sure they know the
+		correct names to add to Skeletal Meshes.
+	*/
+	UPROPERTY(VisibleAnywhere, Category = "Sockets")
+	FName HeadSocketName;
+	UPROPERTY(VisibleAnywhere, Category = "Sockets")
+	FName LeftHandSocketName;
+	UPROPERTY(VisibleAnywhere, Category = "Sockets")
+	FName RightHandSocketName;
+
+
 	/** Components **/
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<USkeletalMeshComponent> FirstPersonMesh;
@@ -30,7 +43,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UCameraComponent> FirstPersonCamera;
 	
-	/** Inputs **/
+
+	/** IMC and Input Actions **/
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputMappingContext> DefaultIMC;
 
@@ -57,11 +71,11 @@ public:
 	/** Input Functions **/
 	void MoveInput(const FInputActionValue& InputValue);
 
+	void LookInput(const FInputActionValue& InputValue);
+
 	UFUNCTION(BlueprintCallable, Category = "Movement")
 	void TryMove(const float X, const float Y);
 
-	void LookInput(const FInputActionValue& InputValue);
-	
 	UFUNCTION(BlueprintCallable, Category = "Movement")
 	void TryLook(const float X, const float Y);
 
