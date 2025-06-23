@@ -12,10 +12,12 @@ AFPSWeaponBase::AFPSWeaponBase()
 	FirstPersonMesh = CreateDefaultSubobject<USkeletalMeshComponent>("First Person Mesh");
 	FirstPersonMesh->SetCollisionProfileName("No Collision");
 	FirstPersonMesh->SetFirstPersonPrimitiveType(EFirstPersonPrimitiveType::FirstPerson);
+	FirstPersonMesh->SetOnlyOwnerSee(true);
 	
 	ThirdPersonMesh = CreateDefaultSubobject<USkeletalMeshComponent>("Third Person Mesh");
 	ThirdPersonMesh->SetCollisionProfileName("No Collision");
 	ThirdPersonMesh->SetFirstPersonPrimitiveType(EFirstPersonPrimitiveType::WorldSpaceRepresentation);
+	ThirdPersonMesh->SetOwnerNoSee(true);
 }
 
 // Called when the game starts or when spawned

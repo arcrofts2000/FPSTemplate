@@ -78,6 +78,9 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Character|Getters")
 	FORCEINLINE UCameraComponent* GetFirstPersonCamera() { return FirstPersonCamera; }
 
+	UFUNCTION(BlueprintPure, Category = "Character|Getters")
+	FORCEINLINE AFPSWeaponBase* GetCurrentWeapon() { return CurrentWeapon; }
+
 
 public:
 	/** Input Functions **/
@@ -95,7 +98,10 @@ public:
 public:
 	//~ Begin IFPSWeaponInterface
 
+	UFUNCTION(BlueprintCallable, Category = "Weapon Interface")
 	virtual void AddWeapon(const TSubclassOf<AFPSWeaponBase>& NewWeapon);
+
+	UFUNCTION(BlueprintCallable, Category = "Weapon Interface")
 	virtual void AttachWeaponToMeshes(AFPSWeaponBase* Weapon);
 
 	//~ End IFPSWeaponInterface
