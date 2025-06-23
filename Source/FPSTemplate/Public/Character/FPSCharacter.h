@@ -4,15 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interfaces/FPSWeaponInterface.h"
 #include "FPSCharacter.generated.h"
 
+class AFPSWeaponBase;
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
 
 UCLASS()
-class FPSTEMPLATE_API AFPSCharacter : public ACharacter
+class FPSTEMPLATE_API AFPSCharacter : public ACharacter, public IFPSWeaponInterface
 {
 	GENERATED_BODY()
 
@@ -35,6 +37,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Sockets")
 	FName RightHandSocketName;
 
+	/** Weapon **/
+	TObjectPtr<AFPSWeaponBase> CurrentWeapon;
 
 	/** Components **/
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
@@ -79,4 +83,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Movement")
 	void TryLook(const float X, const float Y);
 
+
+public:
+	//~ Begin IFPSWeaponInterface
+
+	virtual void AddWeapon(const TSubclassOf<AFPSWeaponBase>& NewWeapon);
+	virtual void AttachWeaponToMeshes(AFPSWeaponBase* Weapon);
+
+	//~ End IFPSWeaponInterface
 };

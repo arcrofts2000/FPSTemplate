@@ -2,6 +2,7 @@
 
 
 #include "Character/FPSCharacter.h"
+#include "Weapons/FPSWeaponBase.h"
 #include "Camera/CameraComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -93,3 +94,18 @@ void AFPSCharacter::TryLook(const float X, const float Y)
 	AddControllerYawInput(X);
 	AddControllerPitchInput(Y);
 }
+
+
+//~ Begin IFPSWeaponInterface
+
+void AFPSCharacter::AddWeapon(const TSubclassOf<AFPSWeaponBase>& NewWeapon)
+{
+
+}
+
+void AFPSCharacter::AttachWeaponToMeshes(AFPSWeaponBase* Weapon)
+{
+
+}
+
+//~ End IFPSWeaponInterface
