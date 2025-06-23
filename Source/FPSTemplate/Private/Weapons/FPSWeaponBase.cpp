@@ -1,14 +1,21 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// All Rights Reserved - Adam Crofts
 
 
 #include "Weapons/FPSWeaponBase.h"
+#include "Components/SkeletalMeshComponent.h"
 
 // Sets default values
 AFPSWeaponBase::AFPSWeaponBase()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+ 	PrimaryActorTick.bCanEverTick = false;
 
+	FirstPersonMesh = CreateDefaultSubobject<USkeletalMeshComponent>("First Person Mesh");
+	FirstPersonMesh->SetCollisionProfileName("No Collision");
+	FirstPersonMesh->SetFirstPersonPrimitiveType(EFirstPersonPrimitiveType::FirstPerson);
+	
+	ThirdPersonMesh = CreateDefaultSubobject<USkeletalMeshComponent>("Third Person Mesh");
+	ThirdPersonMesh->SetCollisionProfileName("No Collision");
+	ThirdPersonMesh->SetFirstPersonPrimitiveType(EFirstPersonPrimitiveType::WorldSpaceRepresentation);
 }
 
 // Called when the game starts or when spawned
@@ -17,11 +24,3 @@ void AFPSWeaponBase::BeginPlay()
 	Super::BeginPlay();
 	
 }
-
-// Called every frame
-void AFPSWeaponBase::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
