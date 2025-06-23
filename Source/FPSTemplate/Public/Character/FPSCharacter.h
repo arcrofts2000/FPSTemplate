@@ -21,6 +21,7 @@ class FPSTEMPLATE_API AFPSCharacter : public ACharacter, public IFPSWeaponInterf
 public:
 	AFPSCharacter();
 
+	
 protected:
 	virtual void BeginPlay() override;
 
@@ -69,6 +70,13 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	/** Getters **/
+	UFUNCTION(BlueprintPure, Category = "Character|Getters")
+	FORCEINLINE USkeletalMeshComponent* GetFirstPersonMesh() { return FirstPersonMesh; }
+
+	UFUNCTION(BlueprintPure, Category = "Character|Getters")
+	FORCEINLINE UCameraComponent* GetFirstPersonCamera() { return FirstPersonCamera; }
 
 
 public:

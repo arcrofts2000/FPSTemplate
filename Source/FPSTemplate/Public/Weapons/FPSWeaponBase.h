@@ -16,6 +16,7 @@ class FPSTEMPLATE_API AFPSWeaponBase : public AActor
 public:	
 	AFPSWeaponBase();
 
+	
 protected:
 	virtual void BeginPlay() override;
 
@@ -25,4 +26,13 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<USkeletalMeshComponent> ThirdPersonMesh;
+
+
+public:
+	/** Getters **/
+	UFUNCTION(BlueprintPure, Category = "Weapon|Getter")
+	FORCEINLINE USkeletalMeshComponent* GetFirstPersonWeapon() { return FirstPersonMesh; }
+
+	UFUNCTION(BlueprintPure, Category = "Weapon|Getter")
+	FORCEINLINE USkeletalMeshComponent* GetThirdPersonWeapon() { return ThirdPersonMesh; }
 };

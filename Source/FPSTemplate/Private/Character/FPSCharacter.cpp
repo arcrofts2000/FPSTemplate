@@ -100,12 +100,21 @@ void AFPSCharacter::TryLook(const float X, const float Y)
 
 void AFPSCharacter::AddWeapon(const TSubclassOf<AFPSWeaponBase>& NewWeapon)
 {
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = this;
+	SpawnParams.Instigator = this;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
+	CurrentWeapon = GetWorld()->SpawnActor<AFPSWeaponBase>(NewWeapon, GetActorTransform(), SpawnParams);
 }
 
 void AFPSCharacter::AttachWeaponToMeshes(AFPSWeaponBase* Weapon)
 {
+	const FAttachmentTransformRules AttachRules(EAttachmentRule::SnapToTarget, false);
+	Weapon->AttachToActor(this, AttachRules);
 
+	Weapon->GetFirstPersonWeapon()->AttachToComponent(GetFirstPersonMesh(), AttachRules, RightHandSocketName);
+	Weapon->GetThirdPersonWeapon()->AttachToComponent(GetMesh(), AttachRules, RightHandSocketName);
 }
 
 //~ End IFPSWeaponInterface
